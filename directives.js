@@ -25,4 +25,34 @@
 
 	});
 
+	app.directive('loadingButton', function () {
+		
+		var directive = {};
+
+		directive.restrict = 'E';
+		directive.templateUrl = 'loading-button.html';
+
+		directive.link = function ($scope, $element, $attrs) {
+			
+			var initCaption = "Click me";
+			$scope.caption = initCaption;
+
+			$scope.changeCaption = function () {
+
+				if ($attrs.caption) {
+					if ($scope.caption === initCaption) {
+						$scope.caption = $attrs.caption;
+					}
+					else {
+						$scope.caption = initCaption;
+					}
+				}
+				
+			};
+
+		};
+
+		return directive;
+	});
+
 })();

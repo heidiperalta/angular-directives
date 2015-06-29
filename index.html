@@ -6,7 +6,7 @@
 <body ng-app="directivesApp" style="font-family:Tahoma; background-color: lightgray">
 	<div ng-controller="generalController">
 		<div style="background-color: whitesmoke" >
-			<h2>Hello directive kitty</h2>
+			<h2>=.Hello directive kitty.=</h2>
 		</div>
 		<div>
 			<div style="width: 50%; float: left">
@@ -23,6 +23,10 @@
 			</div>
 		</div>
 		<div kitty-card="model.kitty"></div>
+		<div style="width: 50%; float: left;">
+			<h3>Loading button test</h3>
+			<loading-button caption="Loading..."></loading-button>
+		</div>
 	</div>
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
