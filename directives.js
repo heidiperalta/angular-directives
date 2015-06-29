@@ -2,6 +2,7 @@
 	
 	var app = angular.module('directivesApp');
 
+	/* Random contact card for kittens */
 	app.directive('kittyCard', function () {
 		
 		var directive = {};
@@ -16,15 +17,13 @@
 
 		directive.replace = true;
 
-		directive.link = function ($scope, $element, $attrs) {
-
-
-		};
+		directive.link = function ($scope, $element, $attrs) {};
 
 		return directive;
 
 	});
 
+	/* A simple "loading..." button */
 	app.directive('loadingButton', function () {
 		
 		var directive = {};
@@ -34,20 +33,30 @@
 
 		directive.link = function ($scope, $element, $attrs) {
 			
-			var initCaption = "Click me";
-			$scope.caption = initCaption;
+			var loadingCaption = "Loading...";
+			var defaultCaption = "Captionless Button";
+
+			var setCaption = function (loading) {
+
+				if (loading) {
+					return $scope.caption = loading;
+				}
+
+				// TODO: Make this part work
+				$scope.caption = $attrs.caption || defaultCaption;
+			};
+
+			var buttonCallback = function (response) {
+				setCaption();
+				alert(response);
+			};
+			
+			// Init button with some caption
+			setCaption();
 
 			$scope.changeCaption = function () {
-
-				if ($attrs.caption) {
-					if ($scope.caption === initCaption) {
-						$scope.caption = $attrs.caption;
-					}
-					else {
-						$scope.caption = initCaption;
-					}
-				}
-				
+				setCaption(loadingCaption);
+				$scope.clickHandler(buttonCallback);
 			};
 
 		};
