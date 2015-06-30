@@ -9,13 +9,10 @@
 
 		// HTML template
 		directive.templateUrl = 'kitty-template.html';
+		directive.replace = true;
 
 		// Isolate scope for my kittens?
-		directive.scope = {
-			kitty: '=kittyCard'
-		};
-
-		directive.replace = true;
+		directive.scope = true;
 
 		directive.link = function ($scope, $element, $attrs) {};
 
@@ -24,44 +21,37 @@
 	});
 
 	/* A simple "loading..." button */
-	app.directive('loadingButton', function () {
+	app.directive('loadingButton', ['$rootScope', function ($rootScope) {
 		
 		var directive = {};
 
-		directive.restrict = 'E';
+		directive.restrict = 'EA';
 		directive.templateUrl = 'loading-button.html';
+
+		// Isolate my scope and get click event handler from parent scope (controller) 
+		directive.scope = {
+			clickHandler: "=ngClick"
+		};
 
 		directive.link = function ($scope, $element, $attrs) {
 			
+			// Requirements
 			var loadingCaption = "Loading...";
 			var defaultCaption = "Captionless Button";
-
-			var setCaption = function (loading) {
-
-				if (loading) {
-					return $scope.caption = loading;
-				}
-
-				// TODO: Make this part work
-				$scope.caption = $attrs.caption || defaultCaption;
-			};
-
-			var buttonCallback = function (response) {
-				setCaption();
-				alert(response);
-			};
+			var initialCaption = $attrs.caption || defaultCaption;
 			
-			// Init button with some caption
-			setCaption();
+			console.log($scope);
 
-			$scope.changeCaption = function () {
-				setCaption(loadingCaption);
-				$scope.clickHandler(buttonCallback);
+			var callback = function () {
+				console.log("hello from directive");
 			};
+
+			// Init button with some caption and event handler
+			$scope.caption = initialCaption;
 
 		};
 
 		return directive;
-	});
+	}]);
 
 })();

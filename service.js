@@ -2,16 +2,16 @@
 	
 	var app = angular.module('directivesApp');
 
-	app.service('kittyService', function() {
+	app.service('kittyService', ['$timeout', function($timeout) {
 
 		var that = this;
 
 		that.takeSomeTime = function (buttonCallback) {
-			setTimeout(function () { 
+			$timeout(function () { 
 				buttonCallback("test passed!");
 			}, 3000);
 		};
 
-	});
+	}]);
 
 })();
