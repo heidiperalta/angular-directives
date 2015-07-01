@@ -43,7 +43,7 @@
 			var setCaption = function (loading) {
 				
 				if (loading) {
-					$scope.caption = loadingCaption;
+					$scope.caption = loading;
 					return;
 				}
 				$scope.caption = initialCaption;
