@@ -39,20 +39,30 @@
 			var loadingCaption = "Loading...";
 			var defaultCaption = "Captionless Button";
 			var initialCaption = $attrs.caption || defaultCaption;
-			
-			var callback = function () {
-				
-				$scope.caption = initialCaption;
-				console.log("hello from directive");
-			};
 
+			var setCaption = function (loading) {
+				
+				if (loading) {
+					$scope.caption = loadingCaption;
+					return;
+				}
+				$scope.caption = initialCaption;
+
+			};
+			
 			// Init button with some caption and event handler
-			$scope.caption = initialCaption;
+			setCaption();
 
 			$scope.clicketyClack = function () {
 
-				$scope.caption = loadingCaption;
-				$scope.clickHandler(callback);
+				// Change caption to "loading..."
+				setCaption(loadingCaption);
+
+				// Call service method through attribute
+				$scope.clickHandler(function () {
+					$scope.caption = initialCaption;
+				});
+
 			};
 
 		};
