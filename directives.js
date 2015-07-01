@@ -40,14 +40,20 @@
 			var defaultCaption = "Captionless Button";
 			var initialCaption = $attrs.caption || defaultCaption;
 			
-			console.log($scope);
-
 			var callback = function () {
+				
+				$scope.caption = initialCaption;
 				console.log("hello from directive");
 			};
 
 			// Init button with some caption and event handler
 			$scope.caption = initialCaption;
+
+			$scope.clicketyClack = function () {
+
+				$scope.caption = loadingCaption;
+				$scope.clickHandler(callback);
+			};
 
 		};
 

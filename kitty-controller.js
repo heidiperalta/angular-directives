@@ -3,11 +3,9 @@
 
 	app.controller('kittyController', [ '$scope', 'kittyService', function ($scope, kittyService) {
 		
-		$scope.clickHandler = function (cb) {
+		$scope.clickHandler = function (directiveCallback) {
 			
-			// I guess this button would have an empty body
-			console.log(cb);
-			console.log("hello from controller");
+			kittyService.takeSomeTime(directiveCallback);
 
 		};
 
